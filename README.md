@@ -47,41 +47,48 @@ Para ejecutar las simulaciones, asegúrate de tener instaladas todas las depende
 
 ## [`01-logistic_growth.py`](https://github.com/xRedDev/COMPUTATIONAL-CANCER-SIMULATIONS/blob/main/01-logistic_growth.py)
 **Versión Animada**:
+
 ```bash
 manim .\01-logistic_growth.py LogisticGrowth -pqh
 ```
 
-**Versión Imágen Final**
+**Versión Imágen Final**:
+
 ```bash
 manim .\01-logistic_growth.py LogisticGrowth -ps
 ```
 
 ## [`02-logistic_growth_matplotlib.py`](https://github.com/xRedDev/COMPUTATIONAL-CANCER-SIMULATIONS/blob/main/01-logistic_growth.py)
 **Abrir una terminal y ejecutar**:
+
 ```bash
 python.exe 02-logistic_growth_matplotlib.py
 ```
 
 ## [`with_treatment_cellular_automaton.py`](https://github.com/xRedDev/COMPUTATIONAL-CANCER-SIMULATIONS/blob/main/with_treatment_cellular_automaton.py)
 **Versión Animada**:
+
 ```bash
 manim .\with_treatment_cellular_automaton.py CellGridWithPlot -pqh --disable_caching
 ```
 
 
 **Versión Imágen Final**:
+
 ```bash
 anim .\with_treatment_cellular_automaton.py CellGridWithPlot -ps
 ```
 
 ## [`without_treatment_cellular_automaton.py`](https://github.com/xRedDev/COMPUTATIONAL-CANCER-SIMULATIONS/blob/main/without_treatment_cellular_automaton.py)
 **Versión Animada**:
+
 ```bash
 manim .\with_treatment_cellular_automaton.py CellGridWithPlot -pqh --disable_caching
 ```
 
 
 **Versión Imágen Final**:
+
 ```bash
 anim .\with_treatment_cellular_automaton.py CellGridWithPlot -ps
 ```
