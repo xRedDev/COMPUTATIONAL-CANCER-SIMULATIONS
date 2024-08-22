@@ -44,7 +44,13 @@ initial_cancer_cells = [(10, 10)] # Tupla que contiene la cantidad inicial de c�
 initial_healthy_cells = [(i, j) for i in range(8, 13) for j in range(8, 13) if (i, j) != (10, 10)] # ' ' ' ' sanas
 
 ''' FUNCIONES '''
-def initialize_grid(): # Comenzar la cuadrícula con una distibucion de celulas
+def initialize_grid() -> np.ndarray:
+    '''
+    Inicializa la cuadrícula con una distribución de células.
+
+    Devuelve:
+    np.ndarray: Un array 2D de numpy que representa el estado inicial del AC.
+    '''
     grid = np.zeros((grid_size, grid_size), dtype=int)
     for (i, j) in initial_cancer_cells:
         grid[i, j] = CANCEROUS
@@ -52,14 +58,15 @@ def initialize_grid(): # Comenzar la cuadrícula con una distibucion de celulas
         grid[i, j] = HEALTHY
     return grid
 
-P_mcs = 0.05   # Probabilidad de muerte de células sanas por tratamiento (5%)
-P_mcc = 0.5    # Probabilidad de muerte de células cancerosas por tratamiento (45%)
-
-def update_grid(grid):
+def update_grid(grid: np.ndarray) -> np.ndarray:
     '''
-    Esta Función sirve para actualizar la cuadrícula según las reglas de transición local del AC y determinar el estado siguiente del mismo con base al estado actual
+    Actualiza la cuadrícula según las reglas de transición locales del AC y determina el estado siguiente del AC basado en el estado actual.
 
-    Recibe la grilla o cuadrícula y devuelve una nueva grilla tras haber evolucionado el estado del AC
+    Parámetros:
+    `grid` (np.ndarray): El estado actual del AC.
+
+    Devuelve:
+    np.ndarray: Un nuevo array 2D de numpy que representa el siguiente estado del AC.
     '''
 
     new_grid = grid.copy() # Se guarda una copia del estado del AC en el instante
@@ -73,32 +80,43 @@ def update_grid(grid):
                 #              Arriba    Abajo     Izquierda  Derecha  Arriba-Izq  Arriba-Der  Abajo-Izq   Abajo-Der 
                 for ni, nj in [(i-1, j), (i+1, j), (i, j-1), (i, j+1), (i-1, j-1), (i-1, j+1), (i+1, j-1), (i+1, j+1)]:
 
-                    if 0 <= ni < grid_size and 0 <= nj < grid_size and grid[ni, nj] == HEALTHY and np.random.rand() < 0.2:
+                    if 0 <= ni < grid_size and 0 <= nj < grid_size and grid[ni, nj] == HEALTHY and np.random.rand() < 0.25:
                         # Regla de propagación del cancer
                         new_grid[ni, nj] = CANCEROUS
                 # Regla de necrosis
-                if np.random.rand() < 0.25:
+                if np.random.rand() < 0.15:
                     new_grid[i, j] = NECROTIC
-            elif grid[i, j] == HEALTHY and np.random.rand() < P_mcs:
-                new_grid[i, j] = EMPTY
-            elif grid[i, j] == CANCEROUS and np.random.rand() < P_mcc:
-                new_grid[i, j] = EMPTY
             elif grid[i, j] == EMPTY and np.random.rand() < 0.05:
                 new_grid[i, j] = HEALTHY
 
     return new_grid # Devuelve el nuevo estado del AC
 
 
-def count_cells(grid):
+def count_cells(grid: np.ndarray) -> dict:
     '''
-    Esta Función toma el AC y devuelve un Diccionario de pares clave-valor
+    Cuenta el número de células en el AC para cada estado.
+
+    Parámetros:
+    `grid` (np.ndarray): El estado actual del AC.
+
+    Devuelve:
+    dict: Un diccionario con los estados de las células como claves y sus conteos como valores.
     '''
 
     unique, counts = np.unique(grid, return_counts=True)
     return dict(zip(unique, counts))
 
 # Inicializar conteo de células
-def initialize_counts(grid):
+def initialize_counts(grid: np.ndarray) -> dict:
+    '''
+    Inicializa el diccionario de conteo de células.
+
+    Parámetros:
+    `grid` (np.ndarray): El estado actual del AC.
+
+    Devuelve:
+    dict: Un diccionario con los estados de las células como claves y sus conteos como valores, inicializados con el estado actual.
+    '''
     counts = count_cells(grid)
     cell_counts = {
         EMPTY: [counts.get(EMPTY, 0)],
@@ -108,7 +126,16 @@ def initialize_counts(grid):
     }
     return cell_counts
 
-def get_grid_mobject(grid):
+def get_grid_mobject(grid: np.ndarray) -> Mobject:
+    '''
+    Crea un Mobject que representa la cuadrícula.
+
+    Parámetros:
+    `grid` (np.ndarray): El estado actual del AC.
+
+    Devuelve:
+    Mobject: Un Mobject que representa la cuadrícula.
+    '''
     colors = {EMPTY: '#d3d3d3', HEALTHY: '#adf30f', CANCEROUS: '#ff4500', NECROTIC: '#4b0082'}
     cell_size = 0.3
     grid_mobject = VGroup() # Inicializamos un grupo de Mobjects vectorizados
@@ -121,7 +148,18 @@ def get_grid_mobject(grid):
             grid_mobject.add(cell)
     return grid_mobject
 
-def get_population_plot_mobject(cell_counts, plot):
+def get_population_plot_mobject(cell_counts: dict, plot: Mobject) -> Mobject:
+    '''
+    Crea un Mobject que representa el gráfico de población.
+
+    Parámetros:
+    `cell_counts` (dict): Un diccionario con los estados de las células como claves y sus conteos como valores.
+    `plot` (Axes): El objeto Axes para el gráfico.
+
+    Devuelve:
+    Mobject: Un Mobject que representa el gráfico de población
+    '''
+
     colors = {EMPTY: '#d3d3d3', HEALTHY: '#adf30f', CANCEROUS: '#ff4500', NECROTIC: '#4b0082'}
     
     time_points = list(range(len(cell_counts[EMPTY])))
@@ -139,7 +177,7 @@ def get_population_plot_mobject(cell_counts, plot):
         )
     return VGroup(*plots)
 
-class CellGridWithPlot(Scene):
+class CellGridWithPlotNoTreatment(Scene):
     def construct(self):
         # Inicializar la cuadrícula y el conteo de células
         grid = initialize_grid()
@@ -180,8 +218,8 @@ if __name__ == "__main__":
     config.pixel_width = 1920
     config.frame_rate = 30
     config.output_file = "cell_automaton_with_plot.mp4"
-    scene = CellGridWithPlot()
+    scene = CellGridWithPlotNoTreatment()
     scene.render()
 
 # Encender una terminal con Control + ñ y a continuación usar el comando:
-# manim .\cell_automaton.py CellGridWithPlot -pqh --disable_caching
+# manim .\cell_automaton.py CellGridWithPlotNoTreatment -pqh --disable_caching
