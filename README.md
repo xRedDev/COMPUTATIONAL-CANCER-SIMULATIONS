@@ -13,6 +13,7 @@ Las simulaciones empleadas fueron diseñadas con librerías del Lenguaje de Prog
 - **Descripción**: Una biblioteca de Python mantenida por la comunidad para crear animaciones matemáticas.
 - **Sitio**: [Documentación de Manim](https://docs.manim.community/en/stable/installation.html)
 - **Instalación**: 
+
     ```bash
     pip install manim
     ```
@@ -21,7 +22,8 @@ Las simulaciones empleadas fueron diseñadas con librerías del Lenguaje de Prog
 > Librería para realizar cálculos necesarios en los modelos empleados computacionalmente.
 - **Descripción**: NumPy es el paquete fundamental para la computación científica en Python. Es una biblioteca de Python que proporciona un objeto de matriz multidimensional, varios objetos derivados (como matrices enmascaradas y matrices), y una variedad de rutinas para realizar operaciones rápidas en matrices, incluyendo operaciones matemáticas, lógicas, manipulación de formas, ordenamiento, selección, entrada/salida, transformadas de Fourier discretas, álgebra lineal básica, operaciones estadísticas básicas, simulación aleatoria y mucho más.
 - **Sitio**: [Documentación de NumPy](https://numpy.org/doc/)
-- **Instalación**: 
+- **Instalación**:
+
     ```bash
     pip install numpy
     ```
@@ -30,7 +32,8 @@ Las simulaciones empleadas fueron diseñadas con librerías del Lenguaje de Prog
 > Librería para realizar gráficas estéticas, también se emplea como auxiliar de un código para mejor eficacia.
 - **Descripción**: Matplotlib es una biblioteca integral para crear visualizaciones estáticas, animadas e interactivas.
 - **Sitio**: [Documentación de Matplotlib](https://matplotlib.org/stable/index.html)
-- **Instalación**: 
+- **Instalación**:
+
     ```bash
     pip install matplotlib
     ```
