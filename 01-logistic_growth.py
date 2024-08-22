@@ -48,7 +48,7 @@ class LogisticGrowth(Scene):
         # Definir los ejes donde gráficaremos la evolución de cada población inicial
         axes = Axes(
             x_range=[0, 15, 1], # de 0 a 15 con paso 1
-            y_range=[0, 2.1, 0.2], # de 0 a 2.1 con paso 0.2
+            y_range=[0, 2.3, 0.2], # de 0 a 2.1 con paso 0.2
 
             # Personalización del eje X
             x_axis_config={
