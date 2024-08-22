@@ -4,7 +4,7 @@ import itertools as it
 import matplotlib as plt
 
 '''
-ESTE PROGRAMA DISEÑA UNA ANIMACIÓN PARA VISUALIZAR LA EVOLUCIÓN DE DISTINTAS POBLACIONES EN UN MODELO LOGÍSTICO.
+ESTE PROGRAMA DISEÑA UNA ANIMACIÓN PARA VISUALIZAR LA EVOLUCIÓN DE DISTINTAS POBLACIONES CELULARES EN UN MODELO LOGÍSTICO SIMPLE.
 '''
 
 # El programa está diseñado con librerías de Python: ManimCE (Community Edition), NumPy, Itertools y Matplotlib
@@ -52,15 +52,15 @@ class LogisticGrowth(Scene):
 
             # Personalización del eje X
             x_axis_config={
-                "numbers_to_include": np.arange(0, 16, 2),
+                "include_numbers": False,
                 "label_direction": DOWN,
-                "include_tip": False,
+                "include_tip": True,
             },
             # Personalización del eje Y
             y_axis_config={
-                "numbers_to_include": np.arange(0, 2.1, 0.5),
+                "include_numbers": False,
                 "label_direction": LEFT,
-                "include_tip": False,
+                "include_tip": True,
             },
         ).scale(.8) # Convertir al 80% de su tamaño original para no saturar la pantalla
 
@@ -89,10 +89,16 @@ class LogisticGrowth(Scene):
 
         for curve in curves:
             self.play(Create(curve), run_time=.6)
-        self.wait()
+        self.wait(2)
 
 # Para ejecutar la animación:
-# Abrir una Terminal con Control + ñ
+# Primero, guardar el archivo con el nombre: 01-logistic_growth.py
 
-# Correr el comando: 
-# manim .\logistic_growth.py LogisticGrowth -pqh
+# Luego, abrir una Terminal (en VScode) con Control + ñ mientras se está en el directorio donde se guardó el archivo
+
+# Correr el comando:
+''' VERSIÓN ANIMADA '''
+# manim .\01-logistic_growth.py LogisticGrowth -pqh
+
+''' VERSIÓN IMAGEN FINAL (Menor tiempo de espera) '''
+# manim .\01-logistic_growth.py LogisticGrowth -ps

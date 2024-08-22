@@ -83,4 +83,4 @@ ani = animation.FuncAnimation(fig, update, frames=len(t), init_func=init, blit=T
 
 plt.show()
 
-# Correr el código con Control + Alt + n
+# Correr el código con Control + Alt + n (En VScode)

@@ -222,4 +222,7 @@ if __name__ == "__main__":
     scene.render()
 
 # Encender una terminal con Control + ñ y a continuación usar el comando:
-# manim .\cell_automaton.py CellGridWithPlotNoTreatment -pqh --disable_caching
+# manim .\without_treatment_cellular_automaton.py CellGridWithPlotNoTreatment -pqh --disable_caching
+
+# O si desea solo ver el final de la simulación en una imágen: 
+# manim .\without_treatment_cellular_automaton.py CellGridWithPlotNoTreatment -ps
